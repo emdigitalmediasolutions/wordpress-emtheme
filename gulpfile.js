@@ -167,12 +167,6 @@ function livebuild(cb) {
     cb();
 }
 
-// includedependencies will include all required dependencies from installed node modules
-function includedependencies(cb) {
-    var streams = [];
-    return merge(streams);
-}
-
 // bundle will create a zip file containing the theme in the out directory, this can be uploaded
 // to a wordpress site as a new theme
 function bundle() {
