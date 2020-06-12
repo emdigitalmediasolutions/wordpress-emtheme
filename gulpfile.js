@@ -25,7 +25,7 @@ const fileSep = path.sep;
 
 sass.compiler = require('node-sass');
 
-const themeBuildPath = 'debug' + fileSep + 'themes' + fileSep + theme.name + fileSep;
+const themeBuildPath = ['debug', 'wordpress', 'wp-content', 'themes', theme.name].join(fileSep) + fileSep;
 const minifyJs = false;
 const sourceMaps = false;
 const minifyCss = false;

@@ -1,0 +1,21 @@
+
+// Contain inner blocks in responsive containers
+
+.wp-block-cover__inner-container {
+    width: 100%; }
+  
+  @media (min-width: 640px) {
+    .wp-block-cover__inner-container {
+      max-width: 640px; } }
+  
+  @media (min-width: 768px) {
+    .wp-block-cover__inner-container {
+      max-width: 768px; } }
+  
+  @media (min-width: 1024px) {
+    .wp-block-cover__inner-container {
+      max-width: 1024px; } }
+  
+  @media (min-width: 1280px) {
+    .wp-block-cover__inner-container {
+      max-width: 1280px; } }

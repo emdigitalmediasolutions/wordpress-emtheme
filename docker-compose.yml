@@ -13,7 +13,7 @@ services:
       WORDPRESS_DB_PASSWORD: Password123
       WORDPRESS_DB_NAME: wp_db
     volumes:
-      - ./debug/themes:/var/www/html/wp-content/themes
+      - ./debug/wordpress:/var/www/html
       - ./debug/plugins:/var/www/html/wp-content/plugins
 
 
