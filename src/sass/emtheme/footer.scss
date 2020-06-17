@@ -1,0 +1,15 @@
+footer .widget_nav_menu ul li.menu-item {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+footer .widget_nav_menu ul li.menu-item a {
+    display: inline-block;
+    opacity: .6;
+    transition-property: opacity;
+    transition-duration: .2s;
+}
+
+footer .widget_nav_menu ul li.menu-item a:hover {
+    opacity: 1;
+}

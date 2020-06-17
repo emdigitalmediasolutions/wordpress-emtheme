@@ -3,10 +3,13 @@
 // Do not access directly
 defined('ABSPATH') || exit;
 
-// Theme default
+// Theme defaults
 const DEFAULT_PRIMARY_COLOR = '#4c51bf';
 const DEFAULT_SECONDARY_COLOR = '#718096';
+const DEFAULT_HEADER_PADDING = '6';
 
+
+// Set theme support
 function em_theme_support()
 {
     // Custom background color
@@ -78,6 +81,7 @@ function themeslug_enqueue_scripts()
     $theme_version = wp_get_theme()->get('Version');
     wp_enqueue_script('script-theme-common', get_template_directory_uri() . '/assets/js/common.min.js', array(), $theme_version, false);
     wp_enqueue_script('script-theme-nav-menu', get_template_directory_uri() . '/assets/js/nav-menu.min.js', array(), $theme_version, false);
+    wp_enqueue_script('script-theme-utilities', get_template_directory_uri() . '/assets/js/utilities.min.js', array(), $theme_version, false);
 }
 
 add_action('wp_enqueue_scripts', 'themeslug_enqueue_styles');

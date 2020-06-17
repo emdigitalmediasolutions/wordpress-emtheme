@@ -29,7 +29,6 @@ if (isset($pageFullWidth) && $pageFullWidth)
 		<div style="background-color: <?php echo $primary_color; ?>;">
 			<div class="<?php echo $containerClass; ?> py-10">
 				<?php the_title( '<h1 class="text-2xl md:text-4xl text-white">', '</h1>' ); ?>
-				<?php if (function_exists(the_subtitle)) {the_subtitle('<p class="text-white">', '</p>');} ?>
 			</div>
 		</div>
 
