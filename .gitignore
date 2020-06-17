@@ -2,3 +2,5 @@
 out/
 debug/
 node_modules/
+.env
+.env.local
