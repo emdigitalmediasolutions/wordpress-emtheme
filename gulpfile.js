@@ -3,6 +3,8 @@
 /* jshint unused: false */ 
 /* jshint loopfunc: true */ 
 
+require('dotenv').config();
+
 const package = require('./package.json');
 const theme = require('./theme.json');
 
@@ -21,6 +23,7 @@ const merge = require('merge-stream');
 const gulpif = require('gulp-if');
 const order = require('gulp-order');
 const postcss = require('gulp-postcss');
+const ftp = require('vinyl-ftp');
 const fileSep = path.sep;
 
 sass.compiler = require('node-sass');
@@ -175,8 +178,33 @@ function bundle() {
     .pipe(dest('out' + fileSep));
 }
 
+function ftpLog(message, detail) {
+    console.log(message, detail ? detail : '');
+}
+
+// deploy will deploy the them via ftp to the wordpress site specified
+function deploy() {
+    const host = process.env.EMTHEME_FTP_HOST;
+    const user = process.env.EMTHEME_FTP_USER;
+    const password = process.env.EMTHEME_FTP_PASSWORD;
+    const path = process.env.EMTHEME_FTP_PATH;
+
+    var conn = ftp.create({
+        host: host,
+        user: user,
+        password: password,
+        parallel: 10,
+        log: ftpLog,
+    });
+
+    return src(themeBuildPath + '**/*.*', {base: themeBuildPath, buffer: false})
+    .pipe(conn.newer(path))
+    .pipe(conn.dest(path));
+}
+
 // All exported gulp scripts are here, these can be called from the terminal
 exports.clean = clean;
 exports.build = series(clean, buildphp, buildassets, buildjs, buildsass);
 exports.watch = series(exports.build, livebuild);
 exports.bundle = series(exports.build, bundle);
+exports.deploy = series(clean, buildphp, buildassets, buildjs, buildsass, deploy);
