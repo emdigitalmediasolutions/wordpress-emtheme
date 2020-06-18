@@ -58,7 +58,6 @@ add_action('after_setup_theme', 'em_theme_support');
 // Include all required files
 $includes = array(
     '/classes/class-emtheme-customize.php',
-    '/blocks/cta.php',
 );
 foreach ($includes as $file)
 {
