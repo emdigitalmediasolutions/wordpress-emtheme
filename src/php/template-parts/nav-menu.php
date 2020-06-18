@@ -15,6 +15,9 @@ $header_footer_text = strtolower( '#' . ltrim( $header_footer_text, '#' ) );
 $header_padding = get_theme_mod( 'header_padding_value', DEFAULT_HEADER_PADDING );
 
 // Get header padding
+$header_letter_spacing = get_theme_mod( 'header_nav_letter_spacing', '' );
+
+// Get header alignment
 $header_alignment = get_theme_mod( 'header_alignment', 'text-right' );
 
 // Get header action button path and label
@@ -40,21 +43,23 @@ $secondary_color = strtolower( '#' . ltrim( $secondary_color, '#' ) );
         <div class="mr-5 nav-menu-site-logo"><?php the_custom_logo(); ?></div>
       </div>
     <?php endif; ?>
-    <div class="hidden sm:block">
-      <span class="font-semibold text-xl tracking-tight">
-        <?php echo $title; ?>
-        <?php if ($description !== '') { ?>
-          <span class="font-normal text-sm"><br />
-            <?php echo $description; ?>
-          </span>
-        <?php } ?>
-        <?php if ($header_contact_number !== '') { ?>
-          <div class="text-base font-normal">
-            <?php echo $header_contact_number; ?>
-          </div>
-        <?php } ?>
-      </span>
-    </div>
+    <?php if (get_theme_mod('header_text') !== 0) : ?>
+      <div class="hidden sm:block">
+        <span class="font-semibold text-xl tracking-tight">
+          <?php echo $title; ?>
+          <?php if ($description !== '') { ?>
+            <span class="font-normal text-sm"><br />
+              <?php echo $description; ?>
+            </span>
+          <?php } ?>
+          <?php if ($header_contact_number !== '') { ?>
+            <div class="text-base font-normal">
+              <?php echo $header_contact_number; ?>
+            </div>
+          <?php } ?>
+        </span>
+      </div>
+    <?php endif; ?>
   </div>
   <div class="block lg:hidden">
     <button class="flex items-center px-3 py-2 border nav-menu-toggle" style="color: <?php echo $header_footer_text; ?>; border-color: <?php echo $header_footer_text; ?>">
@@ -62,11 +67,13 @@ $secondary_color = strtolower( '#' . ltrim( $secondary_color, '#' ) );
     </button>
   </div>
   <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-    <div class="text-sm <?php echo $header_alignment; ?> lg:flex-grow" style="color: <?php echo $header_footer_text; ?>;">
+    <div class="text-sm <?php echo $header_alignment; ?> lg:flex-grow" style="color: <?php echo $header_footer_text; ?>; <?php if ($header_letter_spacing !== '') { echo 'letter-spacing: ' . $header_letter_spacing . 'px;'; } ?>">
     <?php
     wp_nav_menu(array( 
       'theme_location' => 'primary', 
       'container_class' => 'emtheme-menu',
+      'before' => '<span class="hover-text-primary">',
+      'after' => '</span>',
     )); 
     ?>
     </div>

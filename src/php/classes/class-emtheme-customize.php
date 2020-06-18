@@ -164,6 +164,28 @@ if (!class_exists('EmTheme_Customize')) {
 				)
 			);
 
+			// Nav menu letter spacing
+			$wp_customize->add_setting(
+				'header_nav_letter_spacing',
+				array(
+					'default' => '',
+					'sanitize_callback' => 'sanitize_text_field',
+					'transport' => 'refresh',
+				)
+			);
+
+			$wp_customize->add_control(
+				new WP_Customize_Control(
+					$wp_customize,
+					'header_nav_letter_spacing',
+					array(
+						'label' => 'Nav Menu Letter Spacing',
+						'section' => 'header_settings',
+						'type' => 'text',
+					)
+				)
+			);
+
 			// Contact Detail
 			$wp_customize->add_setting(
 				'header_contact_number',
