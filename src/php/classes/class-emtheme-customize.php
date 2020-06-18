@@ -13,6 +13,13 @@ if (!class_exists('EmTheme_Customize')) {
 				'description' => 'Settings for the header and navigation menu'
 			) );
 
+			$wp_customize->add_section( 'footer_settings' , array(
+				'title' => 'Footer',
+				'priority' => 100,
+				'description' => 'Settings making adjustments to the footer'
+			) );
+
+
 
 			// *********************** Colors ****************************
 
@@ -251,6 +258,237 @@ if (!class_exists('EmTheme_Customize')) {
 					)
 				)
 			);
+
+			// Nav menu shadow
+			$wp_customize->add_setting(
+				'header_shadow',
+				array(
+					'default' => '',
+					'sanitize_callback' => 'sanitize_text_field',
+					'transport' => 'refresh',
+				)
+			);
+
+			$wp_customize->add_control(
+				new WP_Customize_Control(
+					$wp_customize,
+					'header_shadow',
+					array(
+						'label' => 'Header Shadow',
+						'section' => 'header_settings',
+						'type' => 'select',
+						'choices' => array(
+							'' => 'None',
+							'shadow-sm' => 'Small',
+							'shadow' => 'Medium',
+							'shadow-lg' => 'Large',
+						)
+					)
+				)
+			);
+
+			// Container class additions
+			$wp_customize->add_setting(
+				'header_container_class',
+				array(
+					'default' => '',
+					'sanitize_callback' => 'sanitize_text_field',
+					'transport' => 'refresh',
+				)
+			);
+
+			$wp_customize->add_control(
+				new WP_Customize_Control(
+					$wp_customize,
+					'header_container_class',
+					array(
+						'label' => 'Header Container Class',
+						'section' => 'header_settings',
+						'type' => 'text'
+					)
+				)
+			);
+
+
+			// ********************** Footer Settings *************************
+
+
+			// Footer shadow
+			$wp_customize->add_setting(
+				'footer_border',
+				array(
+					'default' => '',
+					'sanitize_callback' => 'sanitize_text_field',
+					'transport' => 'refresh',
+				)
+			);
+
+			$wp_customize->add_control(
+				new WP_Customize_Control(
+					$wp_customize,
+					'footer_border',
+					array(
+						'label' => 'Footer Border',
+						'section' => 'footer_settings',
+						'type' => 'checkbox',
+					)
+				)
+			);
+
+			// Footer full width
+			$wp_customize->add_setting(
+				'footer_full_width',
+				array(
+					'default' => '',
+					'sanitize_callback' => 'sanitize_text_field',
+					'transport' => 'refresh',
+				)
+			);
+
+			$wp_customize->add_control(
+				new WP_Customize_Control(
+					$wp_customize,
+					'footer_full_width',
+					array(
+						'label' => 'Footer Full Width',
+						'section' => 'footer_settings',
+						'type' => 'checkbox',
+					)
+				)
+			);
+
+			// Container class additions
+			$wp_customize->add_setting(
+				'footer_container_class',
+				array(
+					'default' => '',
+					'sanitize_callback' => 'sanitize_text_field',
+					'transport' => 'refresh',
+				)
+			);
+
+			$wp_customize->add_control(
+				new WP_Customize_Control(
+					$wp_customize,
+					'footer_container_class',
+					array(
+						'label' => 'Footer Container Class',
+						'section' => 'footer_settings',
+						'type' => 'text'
+					)
+				)
+			);
+
+			// Email link
+			$wp_customize->add_setting(
+				'footer_email_link',
+				array(
+					'default' => '',
+					'sanitize_callback' => 'sanitize_text_field',
+					'transport' => 'refresh',
+				)
+			);
+
+			$wp_customize->add_control(
+				new WP_Customize_Control(
+					$wp_customize,
+					'footer_email_link',
+					array(
+						'label' => 'Footer Email Address',
+						'section' => 'footer_settings',
+						'type' => 'text'
+					)
+				)
+			);
+
+			// Facebook link
+			$wp_customize->add_setting(
+				'footer_facebook_link',
+				array(
+					'default' => '',
+					'sanitize_callback' => 'sanitize_text_field',
+					'transport' => 'refresh',
+				)
+			);
+
+			$wp_customize->add_control(
+				new WP_Customize_Control(
+					$wp_customize,
+					'footer_facebook_link',
+					array(
+						'label' => 'Footer Facebook Page @',
+						'section' => 'footer_settings',
+						'type' => 'text'
+					)
+				)
+			);
+
+			// Instagram link
+			$wp_customize->add_setting(
+				'footer_instagram_link',
+				array(
+					'default' => '',
+					'sanitize_callback' => 'sanitize_text_field',
+					'transport' => 'refresh',
+				)
+			);
+
+			$wp_customize->add_control(
+				new WP_Customize_Control(
+					$wp_customize,
+					'footer_instagram_link',
+					array(
+						'label' => 'Footer Instagram User @',
+						'section' => 'footer_settings',
+						'type' => 'text'
+					)
+				)
+			);
+
+			// Twitter link
+			$wp_customize->add_setting(
+				'footer_twitter_link',
+				array(
+					'default' => '',
+					'sanitize_callback' => 'sanitize_text_field',
+					'transport' => 'refresh',
+				)
+			);
+
+			$wp_customize->add_control(
+				new WP_Customize_Control(
+					$wp_customize,
+					'footer_twitter_link',
+					array(
+						'label' => 'Footer Twitter User @',
+						'section' => 'footer_settings',
+						'type' => 'text'
+					)
+				)
+			);
+
+			// Github link
+			$wp_customize->add_setting(
+				'footer_github_link',
+				array(
+					'default' => '',
+					'sanitize_callback' => 'sanitize_text_field',
+					'transport' => 'refresh',
+				)
+			);
+
+			$wp_customize->add_control(
+				new WP_Customize_Control(
+					$wp_customize,
+					'footer_github_link',
+					array(
+						'label' => 'Footer Github User',
+						'section' => 'footer_settings',
+						'type' => 'text'
+					)
+				)
+			);
+
 
 
         }

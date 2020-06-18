@@ -17,11 +17,33 @@ $header_footer_background = strtolower( '#' . ltrim( $header_footer_background, 
 $header_footer_text = get_theme_mod( 'header_footer_text_color', '#ffffff' );
 $header_footer_text = strtolower( '#' . ltrim( $header_footer_text, '#' ) );
 
+// Get primary and secondary colors
+$primary_color = get_theme_mod( 'primary_background_color', DEFAULT_PRIMARY_COLOR );
+$primary_color = strtolower( '#' . ltrim( $primary_color, '#' ) );
+
+$secondary_color = get_theme_mod( 'secondary_background_color', DEFAULT_SECONDARY_COLOR );
+$secondary_color = strtolower( '#' . ltrim( $secondary_color, '#' ) );
+
+// Get footer shadow
+$footer_border = get_theme_mod( 'footer_border', '' );
+
+// Get footer full width
+$footer_full_width = get_theme_mod( 'footer_full_width', '' );
+
+// Get footer container class
+$footer_container_class = get_theme_mod( 'footer_container_class', '' );
+
+// Get footer links / social settings
+$footer_email_link = get_theme_mod( 'footer_email_link', '' );
+$footer_facebook_link = get_theme_mod( 'footer_facebook_link', '' );
+$footer_instagram_link = get_theme_mod( 'footer_instagram_link', '' );
+$footer_twitter_link = get_theme_mod( 'footer_twitter_link', '' );
+$footer_github_link = get_theme_mod( 'footer_github_link', '' );
 
 ?>
-    <footer>
-      <div class="pt-3 md:pt-6 lg:pt-12 pb-3" style="background-color: <?php echo $header_footer_background; ?>; color: <?php echo $header_footer_text; ?>;">
-        <div class="max-w-screen-xl mx-auto">
+    <footer data-border="">
+      <div class="pt-3 md:pt-6 lg:pt-12 pb-3 <?php echo $footer_border == '1' ? 'border-t' : ''; ?>" style="background-color: <?php echo $header_footer_background; ?>; color: <?php echo $header_footer_text; ?>;">
+        <div class="<?php echo $footer_full_width !== '1' ? 'max-w-screen-xl mx-auto' : ''; ?>">
           <?php if ($has_sidebar_1 || $has_sidebar_2 || $has_sidebar_3 || $has_sidebar_4) { ?>
             <div class="md:flex">
               <div class="md:flex flex-1">
@@ -59,8 +81,47 @@ $header_footer_text = strtolower( '#' . ltrim( $header_footer_text, '#' ) );
             </div>
             <hr class="mx-10 my-4" style="background-color: <?php echo $header_footer_text; ?>; color: <?php echo $header_footer_text; ?>; border-color: <?php echo $header_footer_text; ?>;">
           <?php } ?>
-          <div class="px-3">
-            <p class="py-4 text-sm text-center md:text-left" style="color: <?php echo $header_footer_text; ?>;">© <?php echo date('Y') . ' ' . $title; ?>. All rights reserved.</p>
+          <div class="px-3 md:flex">
+            <div class="md:flex-1">
+              <p class="py-4 md:flex-1 text-sm text-center md:text-left" style="color: <?php echo $header_footer_text; ?>;">© <?php echo date('Y') . ' ' . $title; ?>. All rights reserved.</p>
+            </div>
+            <div class="py-4 md:flex-1 text-sm text-center md:text-right" style="color: <?php echo $header_footer_text; ?>;">
+              <?php if ($footer_email_link !== '') { ?>
+                <a href="mailto:<?php echo $footer_email_link; ?>">
+                  <p class="inline-block p-3 transition duration-200 hover-text-primary cursor-pointer">
+                    <i class="far fa-envelope fa-fw fa-lg"></i>
+                  </p>
+                </a>
+              <?php }
+              if ($footer_facebook_link !== '') { ?>
+                <a href="https://facebook.com/<?php echo $footer_facebook_link; ?>" target="_blank">
+                  <p class="inline-block p-3 transition duration-200 hover-text-primary cursor-pointer">
+                    <i class="fab fa-facebook fa-fw fa-lg"></i>
+                  </p>
+                </a>
+              <?php }
+              if ($footer_instagram_link !== '') { ?>
+                <a href="https://instagram.com/<?php echo $footer_instagram_link; ?>" target="_blank">
+                  <p class="inline-block p-3 transition duration-200 hover-text-primary cursor-pointer">
+                    <i class="fab fa-instagram fa-fw fa-lg"></i>
+                  </p>
+                </a>
+              <?php }
+              if ($footer_twitter_link !== '') { ?>
+                <a href="https://twitter.com/<?php echo $footer_twitter_link; ?>" target="_blank">
+                  <p class="inline-block p-3 transition duration-200 hover-text-primary cursor-pointer">
+                    <i class="fab fa-twitter fa-fw fa-lg"></i>
+                  </p>
+              </a>
+              <?php }
+              if ($footer_github_link !== '') { ?>
+                <a href="https://github.com/<?php echo $footer_github_link; ?>" target="_blank">
+                  <p class="inline-block p-3 transition duration-200 hover-text-primary cursor-pointer">
+                    <i class="fab fa-github fa-fw fa-lg"></i>
+                  </p>
+                </a>
+              <?php } ?>
+            </div>
           </div>
         </div>
       </div>

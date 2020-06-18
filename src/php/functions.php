@@ -46,7 +46,7 @@ function em_theme_support()
 		'height'      => 512,
 		'width'       => 512,
 		'flex-height' => false,
-		'flex-width'  => false,
+		'flex-width'  => true,
 		'header-text' => array( 'site-title', 'site-description' ),
 	);
 	add_theme_support('custom-logo', $defaults);

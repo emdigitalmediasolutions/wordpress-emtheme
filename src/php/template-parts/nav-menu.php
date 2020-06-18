@@ -34,9 +34,15 @@ $primary_color = strtolower( '#' . ltrim( $primary_color, '#' ) );
 $secondary_color = get_theme_mod( 'secondary_background_color', DEFAULT_SECONDARY_COLOR );
 $secondary_color = strtolower( '#' . ltrim( $secondary_color, '#' ) );
 
+// Get header shadow
+$header_shadow = get_theme_mod( 'header_shadow', '' );
+
+// Get header container class
+$header_container_class = get_theme_mod( 'header_container_class', '' );
+
 ?>
 
-<nav class="flex items-center justify-between flex-wrap p-<?php echo $header_padding; ?>" style="background-color: <?php echo $header_footer_background; ?>;">
+<nav class="flex items-center justify-between flex-wrap p-<?php echo $header_padding; ?> <?php echo $header_shadow; ?> <?php echo $header_container_class; ?>" style="background-color: <?php echo $header_footer_background; ?>;">
   <div class="flex items-center flex-shrink-0 mr-6" style="color: <?php echo $header_footer_text; ?>;">
     <?php if ( has_custom_logo() ) : ?>
       <div>
@@ -72,7 +78,7 @@ $secondary_color = strtolower( '#' . ltrim( $secondary_color, '#' ) );
     wp_nav_menu(array( 
       'theme_location' => 'primary', 
       'container_class' => 'emtheme-menu',
-      'before' => '<span class="hover-text-primary">',
+      'before' => '<span class="hover-text-primary" style="transition-property: color; transition-duration: .2s;">',
       'after' => '</span>',
     )); 
     ?>
