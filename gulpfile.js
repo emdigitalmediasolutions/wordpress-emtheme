@@ -29,9 +29,9 @@ const fileSep = path.sep;
 sass.compiler = require('node-sass');
 
 const themeBuildPath = ['debug', 'wordpress', 'wp-content', 'themes', theme.name].join(fileSep) + fileSep;
-const minifyJs = false;
-const sourceMaps = false;
-const minifyCss = false;
+let minifyJs = false;
+let sourceMaps = false;
+let minifyCss = false;
 
 // removeParentPath will remove the parent path from the string will trailing slash if it is present
 function removeParentPath(path, searchPath) {
@@ -202,9 +202,16 @@ function deploy() {
     .pipe(conn.dest(path));
 }
 
+// setProduction will set the build variables to minify JS & CSS and optimise for production use
+function setProduction(cb) {
+    minifyJs = true;
+    minifyCss = true;
+    cb();
+}
+
 // All exported gulp scripts are here, these can be called from the terminal
 exports.clean = clean;
-exports.build = series(clean, buildphp, buildassets, buildjs, buildsass);
+exports.build = series(setProduction, clean, buildphp, buildassets, buildjs, buildsass);
 exports.watch = series(exports.build, livebuild);
-exports.bundle = series(exports.build, bundle);
-exports.deploy = series(clean, buildphp, buildassets, buildjs, buildsass, deploy);
+exports.bundle = series(setProduction, exports.build, bundle);
+exports.deploy = series(setProduction, clean, buildphp, buildassets, buildjs, buildsass, deploy);
