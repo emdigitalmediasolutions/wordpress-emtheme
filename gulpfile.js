@@ -211,7 +211,7 @@ function setProduction(cb) {
 
 // All exported gulp scripts are here, these can be called from the terminal
 exports.clean = clean;
-exports.build = series(setProduction, clean, buildphp, buildassets, buildjs, buildsass);
+exports.build = series(clean, buildphp, buildassets, buildjs, buildsass);
 exports.watch = series(exports.build, livebuild);
 exports.bundle = series(setProduction, exports.build, bundle);
 exports.deploy = series(setProduction, clean, buildphp, buildassets, buildjs, buildsass, deploy);
