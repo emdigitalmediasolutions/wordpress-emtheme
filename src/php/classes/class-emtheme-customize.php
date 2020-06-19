@@ -145,6 +145,29 @@ if (!class_exists('EmTheme_Customize')) {
 				)
 			);
 
+			// Header sticky top
+			$wp_customize->add_setting(
+				'header_sticky_top',
+				array(
+					'default' => '',
+					'sanitize_callback' => 'sanitize_text_field',
+					'transport' => 'refresh',
+				)
+			);
+
+			$wp_customize->add_control(
+				new WP_Customize_Control(
+					$wp_customize,
+					'header_sticky_top',
+					array(
+						'label' => 'Nav bar sticks to top of screen',
+						'section' => 'header_settings',
+						'type' => 'checkbox',
+					)
+				)
+			);
+
+
 			// Header Alignment
 			$wp_customize->add_setting(
 				'header_alignment',

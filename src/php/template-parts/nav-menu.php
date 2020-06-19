@@ -17,6 +17,9 @@ $header_padding = get_theme_mod( 'header_padding_value', DEFAULT_HEADER_PADDING 
 // Get header padding
 $header_letter_spacing = get_theme_mod( 'header_nav_letter_spacing', '' );
 
+// Get header shadow
+$header_sticky_top = get_theme_mod( 'header_sticky_top', '' );
+
 // Get header alignment
 $header_alignment = get_theme_mod( 'header_alignment', 'text-right' );
 
@@ -42,7 +45,7 @@ $header_container_class = get_theme_mod( 'header_container_class', '' );
 
 ?>
 
-<nav class="flex items-center justify-between flex-wrap p-<?php echo $header_padding; ?> <?php echo $header_shadow; ?> <?php echo $header_container_class; ?>" style="background-color: <?php echo $header_footer_background; ?>;">
+<nav class="flex items-center justify-between flex-wrap p-<?php echo $header_padding; ?> <?php echo $header_shadow; ?> <?php echo $header_container_class; ?> <?php echo $header_sticky_top === '1' ? 'sticky top-0' : ''; ?>" style="background-color: <?php echo $header_footer_background; ?>;">
   <div class="flex items-center flex-shrink-0 mr-6" style="color: <?php echo $header_footer_text; ?>;">
     <?php if ( has_custom_logo() ) : ?>
       <div>
