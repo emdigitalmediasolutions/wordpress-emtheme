@@ -183,3 +183,47 @@ function emtheme_menus()
 };
 
 add_action('init', 'emtheme_menus');
+
+
+// Register custom post type for services
+function custom_post_services()
+{
+	$labels = array(
+		'name' => 'Services',
+		'singular_name' => 'Service',
+		'menu_name' => 'Services',
+		'name_admin_bar' => 'Service',
+		'add_new' => 'Add New',
+		'add_new_item' => 'Name',
+		'new_item' => 'New Service',
+		'edit_item' => 'Edit Service',
+		'view_item' => 'View Service',
+		'all_items' => 'All Services',
+		'featured_image' => 'Featured Image',
+		'search_items' => 'Search Service',
+		'parent_item_colon' => 'Parent Service: ',
+		'not_found' => 'Service not found',
+		'not_found_in_trash' => 'Service not found in trash',
+	);
+
+	$args = array(
+		'labels' => $labels,
+		'menu_icon' => 'dashicons-schedule',
+		'description' => 'Services',
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => true,
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => true,
+		'menu_position'      => null,
+        'supports'           => array('title','editor','thumbnail','excerpt'),
+        'show_in_rest'       => true
+	);
+
+	register_post_type('service', $args);
+}
+add_action('init', 'custom_post_services');
