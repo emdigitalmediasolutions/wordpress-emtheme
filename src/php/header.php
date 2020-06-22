@@ -38,7 +38,7 @@
         </style>
     </head>
 
-    <body <?php body_class('flex flex-col h-full'); ?>>
+    <body <?php body_class('flex flex-col min-h-full'); ?>>
 
         <?php
         wp_body_open();
