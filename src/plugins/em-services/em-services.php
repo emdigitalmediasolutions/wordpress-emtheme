@@ -14,20 +14,20 @@
 
 function render_block_em_services( $block_attributes, $content ) {
 
-	$columns = $block_attributes['columns'] ? $block_attributes['columns'] : '6';
+	$columns = isset($block_attributes['columns']) ? $block_attributes['columns'] : '6';
 	$columns = intval($columns);
 	if (($columns < 1) || ($columns > 6))
 	{
 		$columns = 6;
 	}
 
-	$gutter = $block_attributes['gutter'] ? $block_attributes['gutter'] : '0';
+	$gutter = isset($block_attributes['gutter']) ? $block_attributes['gutter'] : '0';
 	$gutter = floatval($gutter);
 
-	$height = $block_attributes['height'] ? $block_attributes['height'] : '300';
+	$height = isset($block_attributes['height']) ? $block_attributes['height'] : '300';
 	$height = intval($height);
 
-	$buttonLabel = $block_attributes['buttonLabel'] ? $block_attributes['buttonLabel'] : 'Open';
+	$buttonLabel = isset($block_attributes['buttonLabel']) ? $block_attributes['buttonLabel'] : 'Open';
 
 	$query = new WP_Query(array(
 		'post_type' => 'service',
@@ -38,7 +38,7 @@ function render_block_em_services( $block_attributes, $content ) {
 		'order' => 'ASC'
 	));
 
-	$result .= '<div style="line-height: 0;">';
+	$result = '<div style="line-height: 0;">';
 	
 	while ($query->have_posts()) {
 		$post = $query->the_post();
