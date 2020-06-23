@@ -4,8 +4,8 @@
 (function() {
     'use strict';
 
-    var scrollPadding = '200';          // The number of pixels into the screen the element must be before the element starts to fade in
-    var scrollComplete = '400';         // The number of pixels into the screen the element must be for the element to be at full opacity
+    var scrollPadding = '50';          // The number of pixels into the screen the element must be before the element starts to fade in
+    var scrollComplete = '150';         // The number of pixels into the screen the element must be for the element to be at full opacity
     var className = '.fade-to-scroll';
 
     var scrollHandle = function() {
