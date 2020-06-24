@@ -88,7 +88,7 @@ $header_container_class = get_theme_mod( 'header_container_class', '' );
     </div>
     <?php if ($header_action_button_path !== '') { ?>
       <div class="text-center p-4 lg:p-0 lg:px-4">
-        <a href="<?php echo $header_action_button_path; ?>" class="rounded-lg px-3 py-2 text-sm text-white" style="background-color: <?php echo $primary_color ?>;">
+        <a href="<?php echo $header_action_button_path; ?>" class="rounded-full px-3 py-2 text-sm text-white" style="background-color: <?php echo $primary_color ?>;">
           <?php echo $header_action_button_label; ?>
         </a>
       </div>
