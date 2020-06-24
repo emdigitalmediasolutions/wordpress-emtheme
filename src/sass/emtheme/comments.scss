@@ -1,0 +1,53 @@
+.comments-inner .comment {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: #eee;
+}
+
+.comments-inner .comment .comment {
+    padding-left: 1.5rem;
+}
+
+.comments-inner .comment img.avatar {
+    max-width: 50px;
+    height: auto;
+    border-radius: 5rem;
+}
+
+.comments-inner .comment .comment-metadata time {
+    font-size: 0.8rem;
+}
+
+#respond {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+#respond textarea#comment {
+    display: block;
+    border: 1px solid #313131;
+}
+
+#respond input[type=text],#respond input[type=email],#respond input[type=url] {
+    border: 1px solid #313131;
+}
+
+
+#respond input#submit.submit {
+    padding: 1rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    border-radius: 5rem;
+    border: 1px solid #313131;
+    color: #313131;
+    cursor: pointer;
+    background-color: transparent;
+    transition-property: background-color, color;
+    transition-duration: .2s;
+}
+
+#respond input#submit.submit:hover {
+    background-color: #313131;
+    color: #fff;
+}
