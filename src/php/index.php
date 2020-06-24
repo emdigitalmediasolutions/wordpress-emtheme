@@ -14,7 +14,7 @@
 get_header();
 ?>
 
-<main id="site-content" role="main">
+<main id="site-content" role="main" class="flex-1">
 
     <?php
 
@@ -94,7 +94,16 @@ get_header();
 		</div><!-- .no-search-results -->
 
 		<?php
-    }
+    } else {
+		?>
+			<div class="text-center container mx-auto py-10 my-10">
+				<article>
+					<h1>No posts found</h1>
+					<h4>Please check back later</h4>
+				</article>
+			</div>
+		<?php
+	}
 
     get_template_part('template-parts/pagination');
 
