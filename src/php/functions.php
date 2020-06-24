@@ -185,3 +185,10 @@ function emtheme_menus()
 };
 
 add_action('init', 'emtheme_menus');
+
+add_filter('render_block', function ($block_content, $block) {
+    if ('core/cover' !== $block['blockName']) {
+        return $block_content;
+    }
+    return str_replace('autoplay muted loop', 'autoplay muted loop playsinline', $block_content);
+}, 10, 2);
