@@ -21,7 +21,7 @@ if (isset($pageFullWidth) && $pageFullWidth)
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
-	<?php if ( !is_front_page() ) : ?>
+	<?php if ( !is_home() ) : ?>
 		<header class="entry-header">
 
 		<?php if (!has_post_thumbnail($post->ID)) { ?>
@@ -49,11 +49,24 @@ if (isset($pageFullWidth) && $pageFullWidth)
 
 		</header><!-- .entry-header -->
 	<?php endif; ?>
+	<?php if (is_home()) { ?>
+		<div class="container mx-auto px-2">
+			<a href="<?php echo get_permalink(); ?>">
+				<h1><?php echo the_title(); ?></h1>
+			</a>
+		</div>
+	<?php } ?>
 
 
 	<div class="<?php echo $containerClass; ?>">
 
-		<?php the_content(); ?>
+		<?php 
+			if (is_search() || !is_singular()) {
+				the_excerpt();
+			} else {
+				the_content();
+			}
+		?>
 
 		<?php
 		wp_link_pages(
@@ -64,12 +77,47 @@ if (isset($pageFullWidth) && $pageFullWidth)
 		);
 		?>
 
+		<?php if (is_home()) { ?>
+			<div class="mt-3">
+				<a href="<?php echo get_permalink(); ?>">
+					<button type="button" class="inline-block rounded-full px-5 py-2 text-white bg-primary-color opacity-75 hover:opacity-100 transition duration-200">View Post</button>
+				</a>
+			</div>
+		<?php } ?>
+
+
 	</div><!-- .entry-content -->
 
 	<footer class="<?php echo $containerClass; ?> py-10">
 
-		<?php edit_post_link('Edit Page', '<span class="inline-block rounded px-5 py-2 text-white" style="background-color: ' . $secondary_color . ';">', '</span>'); ?>
+		<?php edit_post_link('Edit Post', '<span class="inline-block rounded-full px-5 py-2 text-white opacity-75 hover:opacity-100 transition duration-200" style="background-color: ' . $secondary_color . ';">', '</span>'); ?>
 
 	</footer><!-- .entry-footer -->
+
+	<?php
+
+	if ( is_single() ) {
+
+		get_template_part( 'template-parts/navigation' );
+
+	}
+
+	/**
+	 *  Output comments wrapper if it's a post, or if comments are open,
+	 * or if there's a comment number – and check for password.
+	 * */
+	if ( ( is_single() || is_page() ) && ( comments_open() || get_comments_number() ) && ! post_password_required() ) {
+		?>
+
+		<div class="container mx-auto mt-5">
+
+			<?php comments_template(); ?>
+
+		</div><!-- .comments-wrapper -->
+
+		<?php
+	}
+?>
+
 
 </article><!-- #post-## -->

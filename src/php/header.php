@@ -20,6 +20,14 @@
             $secondary_color = strtolower( '#' . ltrim( $secondary_color, '#' ) );
         ?>
         <style>
+            .bg-primary-color {
+                background-color: <?php echo $primary_color; ?>;
+            }
+
+            .bg-secondary-color {
+                background-color: <?php echo $secondary_color; ?>;
+            }
+
             .hover-bg-primary:hover {
                 background-color: <?php echo $primary_color; ?>;
             }
