@@ -246,7 +246,7 @@ function buildPlugins(cb) {
 
 // All exported gulp scripts are here, these can be called from the terminal
 exports.clean = clean;
-exports.build = series(clean, cleanPlugins, buildphp, buildassets, buildjs, buildsass, buildPlugins);
+exports.build = series(clean, buildphp, buildassets, buildjs, buildsass);
 exports.watch = series(exports.build, livebuild);
 exports.bundle = series(setProduction, exports.build, bundle);
 exports.deploy = series(setProduction, exports.build, deploy);
