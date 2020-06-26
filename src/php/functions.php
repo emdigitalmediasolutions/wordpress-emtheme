@@ -186,9 +186,82 @@ function emtheme_menus()
 
 add_action('init', 'emtheme_menus');
 
+// Fix videos not playing on iPhones
 add_filter('render_block', function ($block_content, $block) {
     if ('core/cover' !== $block['blockName']) {
         return $block_content;
     }
     return str_replace('autoplay muted loop', 'autoplay muted loop playsinline', $block_content);
 }, 10, 2);
+
+
+// Add woocommerce support to theme
+function emtheme_add_woocommerce_support() {
+    add_theme_support( 'woocommerce', array(
+        'thumbnail_image_width' => 300,
+        'single_image_width'    => 900,
+
+        'product_grid'          => array(
+            'default_rows'    => 3,
+            'min_rows'        => 2,
+            'max_rows'        => 8,
+            'default_columns' => 4,
+            'min_columns'     => 2,
+            'max_columns'     => 5,
+        ),
+	) );
+	
+	add_theme_support( 'wc-product-gallery-zoom' );
+	add_theme_support( 'wc-product-gallery-lightbox' );
+	add_theme_support( 'wc-product-gallery-slider' );
+}
+
+add_action( 'after_setup_theme', 'emtheme_add_woocommerce_support' );
+
+// Custom cart counter update
+add_filter( 'woocommerce_add_to_cart_fragments', 'emtheme_cart_count_fragments', 10, 1 );
+function emtheme_cart_count_fragments( $fragments ) {
+	$fragments['div.emtheme-cart-count'] = WC()->cart->get_cart_contents_count();
+
+	if (WC()->cart->get_cart_contents_count() > 0) {
+		$fragments['div.emtheme-cart-count'] = '<span class="fa-layers-counter inline-block absolute text-xs top-0 right-0 font-bold text-primary-color">' .
+			WC()->cart->get_cart_contents_count() .
+		'<span>';
+	}
+
+    return $fragments;
+}
+
+
+// Ajax update for cart count
+function woocommerce_header_add_to_cart_fragment( $fragments ) {
+	$result = '<span class="cart-contents">' .
+	'<i class="fas fa-fw fa-shopping-cart"></i>';
+
+	if (WC()->cart->get_cart_contents_count() > 0) {
+		$result .= '<span class="font-bold">' .
+			'<i class="fas fa-fw fa-minus fa-rotate-90 mx-1 opacity-50"></i>' .
+			'<span class="font-bold text-sm">' .
+				WC()->cart->get_cart_contents_count() .
+			'</span>' .
+		'</span>';
+	}
+
+	$result .= '</span>';
+	
+	$fragments['span.cart-contents'] = $result;
+	
+	return $fragments;
+}
+add_filter( 'woocommerce_add_to_cart_fragments', 'woocommerce_header_add_to_cart_fragment' );
+
+
+// Use modern (ish) jquery
+function nwd_modern_jquery() {
+	global $wp_scripts;
+	if(is_admin()) return;
+	$wp_scripts->registered['jquery-core']->src = get_stylesheet_directory_uri() .'/assets/jquery-3.5.1.min.js';
+	$wp_scripts->registered['jquery']->deps = ['jquery-core'];
+}
+
+add_action('wp_enqueue_scripts', 'nwd_modern_jquery');

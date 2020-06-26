@@ -43,6 +43,14 @@ $header_shadow = get_theme_mod( 'header_shadow', '' );
 // Get header container class
 $header_container_class = get_theme_mod( 'header_container_class', '' );
 
+$woocommerce_active = false;
+$cart_url = '';
+if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+  $woocommerce_active = true;
+  global $woocommerce;
+  $cart_url = $woocommerce->cart->get_cart_url();
+}
+
 ?>
 
 <nav class="flex items-center justify-between flex-wrap p-<?php echo $header_padding; ?> <?php echo $header_shadow; ?> <?php echo $header_container_class; ?> <?php echo $header_sticky_top === '1' ? 'sticky top-0' : ''; ?> z-50" style="background-color: <?php echo $header_footer_background; ?>;">
@@ -86,6 +94,21 @@ $header_container_class = get_theme_mod( 'header_container_class', '' );
     )); 
     ?>
     </div>
+    <?php if ($woocommerce_active) { ?>
+        <div class="text-center text-white px-3">
+          <a href="<?php echo $cart_url; ?>" class="inline-block relative text-sm bg-primary-color rounded-full p-2 px-4 rounded-full opacity-75 hover:opacity-100 transition duration-200" title="Shopping Cart">
+            <span class="cart-contents">
+              <i class="fas fa-fw fa-shopping-cart"></i>
+              <?php if ($woocommerce->cart->cart_contents_count > 0) {
+                echo '<i class="fas fa-fw fa-minus fa-rotate-90 mx-1 opacity-50"></i>' .
+                '<span class="font-bold text-sm">' .
+                  $woocommerce->cart->cart_contents_count .
+                '</span>';
+              } ?>
+            </span>
+          </a>
+        </div>
+    <?php } ?>
     <?php if ($header_action_button_path !== '') { ?>
       <div class="text-center p-4 lg:p-0 lg:px-4">
         <a href="<?php echo $header_action_button_path; ?>" class="rounded-full px-3 py-2 text-sm text-white" style="background-color: <?php echo $primary_color ?>;">
