@@ -98,14 +98,12 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
         <div class="text-center text-white px-3">
           <a href="<?php echo $cart_url; ?>" class="inline-block relative text-sm bg-primary-color rounded-full p-2 px-4 rounded-full opacity-75 hover:opacity-100 transition duration-200" title="Shopping Cart">
             <span class="cart-contents">
-              <i class="fas fa-fw fa-shopping-cart"></i>
-              <?php if ($woocommerce->cart->cart_contents_count > 0) {
+              <i class="fas fa-fw fa-shopping-cart"></i><?php if ($woocommerce->cart->cart_contents_count > 0) {
                 echo '<i class="fas fa-fw fa-minus fa-rotate-90 mx-1 opacity-50"></i>' .
                 '<span class="font-bold text-sm">' .
                   $woocommerce->cart->cart_contents_count .
                 '</span>';
-              } ?>
-            </span>
+              } ?></span>
           </a>
         </div>
     <?php } ?>
