@@ -29,7 +29,6 @@ const fileSep = path.sep;
 sass.compiler = require('node-sass');
 
 const themeBuildPath = ['debug', 'wordpress', 'wp-content', 'themes', theme.name].join(fileSep) + fileSep;
-const pluginBuildPath = ['debug', 'plugins'].join(fileSep) + fileSep;
 let minifyJs = false;
 let sourceMaps = false;
 let minifyCss = false;
@@ -210,44 +209,9 @@ function setProduction(cb) {
     cb();
 }
 
-function cleanPlugins(cb) {
-    del([pluginBuildPath + '*'])
-    .catch(function() {})
-    .then(function() {
-        cb();
-    });
-}
-
-// buildPlugins will build all plugins and add them to the debug / build folder
-function buildPlugins(cb) {
-    const pluginPath = ['src', 'plugins'].join(fileSep);
-
-    var folders = getFolders(pluginPath);
-    var streams = [];
-
-    if (folders.length === 0) {
-        cb();
-        return;
-    }
-
-    // For each folder we are going to move over to debug as is, excluding node_modules
-    folders.forEach(function(folder) {
-        streams.push(
-            src([path.join(pluginPath, folder, '**/*.*'), '!' + path.join(pluginPath, folder, 'node_modules/**/*.*')], {base: process.cwd()})
-            .pipe(rename(function(path) {
-                path.dirname = removeParentPath(path.dirname, pluginPath);
-            }))
-            .pipe(dest(pluginBuildPath))
-        );
-    });
-
-    return merge(streams);
-}
-
 // All exported gulp scripts are here, these can be called from the terminal
 exports.clean = clean;
 exports.build = series(clean, buildphp, buildassets, buildjs, buildsass);
 exports.watch = series(exports.build, livebuild);
 exports.bundle = series(setProduction, exports.build, bundle);
 exports.deploy = series(setProduction, exports.build, deploy);
-exports.plugins = series(cleanPlugins, buildPlugins);
