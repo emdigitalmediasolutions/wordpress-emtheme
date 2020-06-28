@@ -124,6 +124,11 @@ $footer_github_link = get_theme_mod( 'footer_github_link', '' );
             </div>
           </div>
         </div>
+        <div class="text-center text-xs mt-0 mb-4 em-footer">
+          <a href="https://emdigitalmediasolutions.co.uk/" target="_blank" class="inline-block bg-primary-color text-white rounded-full opacity-75 hover:opacity-100 transition duration-200 p-1 px-4">
+            Powered by EM Digital Media Solutions
+          </a>
+        </div>
       </div>
     </footer>
 
