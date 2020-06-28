@@ -56,7 +56,7 @@ if (isset($pageFullWidth) && $pageFullWidth)
 
 	<footer class="<?php echo $containerClass; ?> py-10">
 
-		<?php edit_post_link('Edit Page', '<span class="inline-block rounded px-5 py-2 text-white" style="background-color: ' . $secondary_color . ';">', '</span>'); ?>
+		<?php edit_post_link('Edit Page', '<span class="inline-block rounded-full px-5 py-2 text-white opacity-75 hover:opacity-100 transition duration-200" style="background-color: ' . $secondary_color . ';">', '</span>'); ?>
 
 	</footer><!-- .entry-footer -->
 
